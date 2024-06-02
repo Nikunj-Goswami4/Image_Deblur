@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="author" content="Nikunj">
+    <title>Image Deblurring</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+        }
+        .custom-input {
+            width: 30%;
+        }
+        #uploaded-image {
+            display: none;
+            max-width: 100%;
+            height: 350px;
+            margin-top: 5px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-primary {
+            background-color: #007bff;
+        }
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+        .author-name {
+            color: #686868fc;
+            position: absolute;
+            bottom: 0;
+            right: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 align="center">Image Deblurring</h1>
+
+    <form class="p-3 text-center" action='/', method="post" enctype="multipart/form-data" id="predictionForm">
+        <input class="form-control custom-input mx-auto" type="file" name="imagefile">
+        <input class="btn btn-primary mt-3" type="submit" value="Predict Image" id="predictButton">
+    </form>
+
+    <div class="text-center mt-4">
+        <img id="uploaded-image" src="#" alt="Uploaded Image">
+        {% if predicted_image %}
+        <!-- <img src="{{ predicted_image }}" alt="Predicted Image" id="predictedImage"> -->
+        {% endif %}
+    </div>
+
+    <script>
+        const fileInput = document.querySelector('input[type="file"]');
+        const uploadedImage = document.getElementById('uploaded-image');
+        const predictText = document.getElementById('predict-text');
+
+        fileInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                uploadedImage.src = URL.createObjectURL(file);
+                uploadedImage.style.display = 'block';
+                
+            } else {
+                uploadedImage.style.display = 'none';
+            }
+
+            // Delay
+            // setTimeout(function() {
+            //     const predictedImage = document.getElementById('predictedImage');
+            //     if (predictedImage) {
+            //         predictedImage.style.display = 'block';
+            //     }
+            // }, 5000); // 5 seconds
+        });
+    </script>
+
+</body>
+</html>
